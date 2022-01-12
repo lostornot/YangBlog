@@ -56,13 +56,13 @@ const BLOG = {
     telegram: 'https://t.me/tangly_1024'
   },
   comment: { // 评论插件，支持 gitalk, utterances, cusdis
-    provider: '', // 不需要则留空白
+    provider: 'gitalk', // 不需要则留空白
     gitalkConfig: {
       repo: 'NotionNext', // The repository of store comments
       owner: 'tangly1024',
       admin: ['tangly1024'],
-      clientID: 'be7864a16b693e256f8f',
-      clientSecret: 'REMOVED_OAUTH_SECRET',
+      clientID: process.env.GITALK_ID || 'be7864a16b693e256f8f',
+      clientSecret: process.env.GITALK_SECRET || 'REMOVED_OAUTH_SECRET',
       distractionFreeMode: false
     },
     cusdisConfig: {
