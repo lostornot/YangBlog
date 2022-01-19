@@ -1,102 +1,68 @@
+// 注: process.env.XX是Vercel的环境变量，配置方式见：https://docs.tangly1024.com/zh/features/personality
 const BLOG = {
-  title: '小唐笔记', // 站点标题
-  description: '分享编程技术与记录生活', // 站点描述
-  author: 'tangly1024', // 作者
-  bio: '一个普通的干饭人🍚', // 作者简介
-  email: 'tlyong1992@hotmail.com', // 联系邮箱
-  link: 'https://tangly1024.com', // 网站地址
-  keywords: ['Notion', '写作', '博客'], // 网站关键词
-  home: { // 首页
-    showHomeBanner: false, // 首页是否显示大图及标语 [true,false]
-    homeBannerStrings: ['Hi，我是一个程序员', 'Hi，我是一个打工人', 'Hi，我是一个干饭人', '欢迎来到我的博客🎉'], // 首页大图标语文字
-    homeBannerImage: './bg_image.jpg', // 背景图地址
-    showPostCover: false, // 文章列表显示封面图
-    showPreview: true, // 列表展示文章预览
-    previewLines: 12, // 预览文章的篇幅
-    showSummary: false // 显示用户自定义摘要
-  },
-  lang: 'zh-CN', // ['zh-CN','en-US'] default lang => see /lib/lang.js for more.
-  notionPageId: process.env.NOTION_PAGE_ID || 'bee1fccfa3bd47a1a7be83cc71372d83', // Important page_id！！！
-  notionAccessToken: process.env.NOTION_ACCESS_TOKEN || '', // Useful if you prefer not to make your database public
-  appearance: 'auto', // ['light', 'dark', 'auto'],
-  font: 'font-serif tracking-wider subpixel-antialiased', // 文章字体 ['font-sans', 'font-serif', 'font-mono'] @see https://www.tailwindcss.cn/docs/font-family
-  lightBackground: '#eeeeee', // use hex value, don't forget '#' e.g #fffefc
-  darkBackground: '#111827', // use hex value, don't forget '#'
-  path: '', // leave this empty unless you want to deploy in a folder
-  since: 2020, // if leave this empty, current year will be used.
-  postListStyle: 'page', // ['page','scroll] 文章列表样式:页码分页、单页滚动加载
-  postsPerPage: 6, // post counts per page
-  sortByDate: false,
-  topNavType: 'normal', // ['fixed','autoCollapse','normal'] 分别是固定顶部、固定底部滑动时自动折叠，不固定
-  menu: { // 菜单栏设置
-    showAbout: false, // 显示关于
-    showCategory: true, // 显示分类
-    showTag: true, // 显示标签
-    showArchive: true, // 显示归档
-    showSearch: true // 显示搜索
-  },
-  widget: { // 挂件及组件设置
-    showPet: false, // 是否显示宠物挂件
-    petLink: 'https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json', // 挂件模型地址 @see https://github.com/xiazeyu/live2d-widget-models
-    showToTop: true, // 是否显示回顶
-    showToBottom: false, // 显示回底
-    showDarkMode: false, // 显示日间/夜间模式切换
-    showToc: true, // 移动端显示悬浮目录
-    showShareBar: false, // 文章分享功能
-    showRelatePosts: true, // 相关文章推荐
-    showCopyRight: true, // 文章版权声明
-    showLatestPost: false, // 右侧边栏显示最近更新
-    showCategoryList: false, // 右侧边栏显示文章分类列表
-    showTagList: false // 右侧边栏显示标签分类列表
-  },
-  socialLink: { // 社交链接，如不需要展示可以留空白，例如 weibo:''
-    weibo: 'https://weibo.com/tangly1024',
-    twitter: 'https://twitter.com/troy1024_1',
-    github: 'https://github.com/tangly1024',
-    telegram: 'https://t.me/tangly_1024'
-  },
-  comment: { // 评论插件，支持 gitalk, utterances, cusdis
-    provider: 'gitalk', // 不需要则留空白
-    gitalkConfig: {
-      repo: 'NotionNext', // The repository of store comments
-      owner: 'tangly1024',
-      admin: ['tangly1024'],
-      clientID: process.env.GITALK_ID || 'be7864a16b693e256f8f',
-      clientSecret: process.env.GITALK_SECRET || 'REMOVED_OAUTH_SECRET',
-      distractionFreeMode: false
-    },
-    cusdisConfig: {
-      appId: '445ba48e-f751-487f-b22f-cdbe3310d28f', // data-app-id
-      host: 'https://cusdis.com', // data-host, change this if you're using self-hosted version
-      scriptSrc: 'https://cusdis.com/js/cusdis.es.js' // change this if you're using self-hosted version
-    },
-    utterancesConfig: {
-      repo: 'tangly1024/NotionNext'
-    },
-    gitter: '', // gitter聊天室
-    DaoVoiceId: '', // DaoVoice http://dashboard.daovoice.io/get-started
-    TidioId: '' // https://www.tidio.com/
-  },
-  // --- 高级设置
-  analytics: { // 文章访问量统计
-    busuanzi: true, // 展示网站阅读量、访问数 see http://busuanzi.ibruce.info/
-    provider: 'ga', // 支持 Google Analytics and Ackee, please fill with 'ga' or 'ackee', leave it empty to disable it.
-    baiduAnalytics: 'f683ef76f06bb187cbed5546f6f28f28', // e.g only need xxxxx -> https://hm.baidu.com/hm.js?[xxxxx]
-    cnzzAnalytics: '', // 站长统计id only need xxxxxxxx -> https://s9.cnzz.com/z_stat.php?id=[xxxxxxxx]&web_id=[xxxxxxx]
-    gaConfig: {
-      measurementId: 'G-68EK0W049N' // e.g: G-XXXXXXXXXX
-    },
-    ackeeConfig: {
-      tracker: '', // e.g 'https://ackee.tangly1024.net/tracker.js'
-      dataAckeeServer: '', // e.g https://ackee.tangly1024.net , don't end with a slash
-      domainId: '' // e.g '0e2257a8-54d4-4847-91a1-0311ea48cc7b'
-    }
-  },
-  seo: {
-    googleSiteVerification: '' // Remove the value or replace it with your own google site verification code
-  },
-  googleAdsenseId: 'ca-pub-2708419466378217', // 谷歌广告ID
-  isProd: process.env.VERCEL_ENV === 'production'// distinguish between development and production environment (ref: https://vercel.com/docs/environment-variables#system-environment-variables)
+  TITLE: process.env.NEXT_PUBLIC_TITLE || 'NotionNext BLOG', // 站点标题
+  DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION || '这是一个由NotionNext生成的站点', // 站点描述
+  AUTHOR: 'tangly1024', // 作者
+  BIO: '一个普通的干饭人🍚', // 作者简介
+  LINK: 'https://tangly1024.com', // 网站地址
+  KEYWORDS: 'Notion, 博客', // 网站关键词 英文逗号隔开
+  NOTION_PAGE_ID: process.env.NOTION_PAGE_ID || '02ab3b8678004aa69e9e415905ef32a5', // Important page_id！！！Duplicate Template from  https://www.notion.so/tanghh/02ab3b8678004aa69e9e415905ef32a5
+  NOTION_ACCESS_TOKEN: process.env.NOTION_ACCESS_TOKEN || '', // Useful if you prefer not to make your database public
+
+  LANG: 'zh-CN', // e.g 'zh-CN','en-US'  see /lib/lang.js for more.
+  SINCE: 2021, // e.g if leave this empty, current year will be used.
+  BEI_AN: '', // 备案号 闽ICP备XXXXXXX
+  APPEARANCE: 'auto', // ['light', 'dark', 'auto'],
+  FONT: 'font-serif tracking-wider subpixel-antialiased', // 文章字体 ['font-sans', 'font-serif', 'font-mono'] @see https://www.tailwindcss.cn/docs/font-family
+  BACKGROUND_LIGHT: '#eeeeee', // use hex value, don't forget '#' e.g #fffefc
+  BACKGROUND_DARK: '#111827', // use hex value, don't forget '#'
+  PATH: '', // leave this empty unless you want to deploy in a folder
+
+  POST_LIST_STYLE: 'page', // ['page','scroll] 文章列表样式:页码分页、单页滚动加载
+  POST_PREVIEW_LINES: 12, // 预览博客行数
+  POSTS_PER_PAGE: 6, // post counts per page
+  POSTS_SORT_BY: 'notion', // 排序方式 'date'按时间,'notion'由notion控制
+
+  // 社交链接，不需要可留空白，例如 CONTACT_WEIBO:''
+  CONTACT_EMAIL: 'tlyong1992@hotmail.com',
+  CONTACT_WEIBO: 'https://weibo.com/tangly1024',
+  CONTACT_TWITTER: 'https://twitter.com/troy1024_1',
+  CONTACT_GITHUB: 'https://github.com/tangly1024',
+  CONTACT_TELEGRAM: 'https://t.me/tangly_1024',
+
+  // 评论互动 可同时开启 CUSDIS UTTERRANCES GITALK
+  COMMENT_CUSDIS_APP_ID: process.env.NEXT_PUBLIC_COMMENT_CUSDIS_APP_ID || '', // data-app-id 36位 see https://cusdis.com/
+  COMMENT_CUSDIS_HOST: process.env.NEXT_PUBLIC_COMMENT_CUSDIS_HOST || 'https://cusdis.com', // data-host, change this if you're using self-hosted version
+  COMMENT_CUSDIS_SCRIPT_SRC: process.env.NEXT_PUBLIC_COMMENT_CUSDIS_SCRIPT_SRC || 'https://cusdis.com/js/cusdis.es.js', // change this if you're using self-hosted version
+
+  COMMENT_UTTERRANCES_REPO: process.env.NEXT_PUBLIC_COMMENT_UTTERRANCES_REPO || '', // e.g 'tangly1024/NotionNext' see https://utteranc.es/
+
+  COMMENT_GITALK_REPO: process.env.NEXT_PUBLIC_COMMENT_GITALK_REPO || '', // e.g NotionNext see https://gitalk.github.io/
+  COMMENT_GITALK_OWNER: process.env.NEXT_PUBLIC_COMMENT_GITALK_OWNER || '', // e.g tangly1024
+  COMMENT_GITALK_ADMIN: process.env.NEXT_PUBLIC_COMMENT_GITALK_ADMIN || '', // e.g 'tangly1024'
+  COMMENT_GITALK_CLIENT_ID: process.env.NEXT_PUBLIC_COMMENT_GITALK_CLIENT_ID || '', // e.g 20位ID
+  COMMENT_GITALK_CLIENT_SECRET: process.env.NEXT_PUBLIC_COMMENT_GITALK_CLIENT_SECRET || '', // e.g 40位ID
+  COMMENT_GITALK_DISTRACTION_FREE_MODE: false,
+
+  COMMENT_GITTER_ROOM: process.env.NEXT_PUBLIC_COMMENT_GITTER_ROOM || '', // gitter聊天室 see https://gitter.im/ 不需要则留空
+  COMMENT_DAO_VOICE_ID: process.env.NEXT_PUBLIC_COMMENT_DAO_VOICE_ID || '', // DaoVoice http://dashboard.daovoice.io/get-started
+  COMMENT_TIDIO_ID: process.env.NEXT_PUBLIC_COMMENT_TIDIO_ID || '', // [tidio_id] -> //code.tidio.co/[tidio_id].js
+
+  //  站点统计
+  ANALYTICS_BUSUANZI_ENABLE: true, // 展示网站阅读量、访问数 see http://busuanzi.ibruce.info/
+  ANALYTICS_BAIDU_ID: process.env.NEXT_PUBLIC_ANALYTICS_BAIDU_ID || '', // e.g 只需要填写百度统计的id，[baidu_id] -> https://hm.baidu.com/hm.js?[baidu_id]
+  ANALYTICS_CNZZ_ID: process.env.NEXT_PUBLIC_ANALYTICS_CNZZ_ID || '', // 只需要填写站长统计的id, [cnzz_id] -> https://s9.cnzz.com/z_stat.php?id=[cnzz_id]&web_id=[cnzz_id]
+  ANALYTICS_GOOGLE_ID: process.env.NEXT_PUBLIC_ANALYTICS_GOOGLE_ID || '', // 谷歌Analytics的id e.g: G-XXXXXXXXXX
+
+  ANALYTICS_ACKEE_TRACKER: process.env.NEXT_PUBLIC_ANALYTICS_ACKEE_TRACKER || '', // e.g 'https://ackee.tangly1024.net/tracker.js'
+  ANALYTICS_ACKEE_DATA_SERVER: process.env.NEXT_PUBLIC_ANALYTICS_ACKEE_DATA_SERVER || '', // e.g https://ackee.tangly1024.net , don't end with a slash
+  ANALYTICS_ACKEE_DOMAIN_ID: process.env.NEXT_PUBLIC_ANALYTICS_ACKEE_DOMAIN_ID || '', // e.g '0e2257a8-54d4-4847-91a1-0311ea48cc7b'
+
+  SEO_GOOGLE_SITE_VERIFICATION: process.env.NEXT_PUBLIC_SEO_GOOGLE_SITE_VERIFICATION || '', // Remove the value or replace it with your own google site verification code
+
+  ADSENSE_GOOGLE_ID: process.env.NEXT_PUBLIC_ADSENSE_GOOGLE_ID || '', // 谷歌广告ID e.g ca-pub-xxxxxxxxxxxxxxxx
+
+  isProd: process.env.VERCEL_ENV === 'production' // distinguish between development and production environment (ref: https://vercel.com/docs/environment-variables#system-environment-variables)  isProd: process.env.VERCEL_ENV === 'production' // distinguish between development and production environment (ref: https://vercel.com/docs/environment-variables#system-environment-variables)
 }
-// export default BLOG
+
 module.exports = BLOG
