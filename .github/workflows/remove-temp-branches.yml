@@ -1,0 +1,31 @@
+name: Remove temporary cleanup branches
+
+on:
+  push:
+    paths:
+      - '.github/workflows/remove-temp-branches.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: github.event.head_commit.message == 'Remove temporary history cleanup branches'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Remove workflow and temporary branches
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -f .github/workflows/remove-temp-branches.yml
+          git add .github/workflows/remove-temp-branches.yml
+          git commit -m 'Remove temporary branch cleanup workflow'
+          git push origin main
+          for branch in history-cleanup history-cleanup-backup history-cleanup-backup-2 history-cleanup-backup-3 history-cleanup-backup-4 history-cleanup-backup-5 history-cleanup-backup-6 history-cleanup-backup-7 history-cleanup-backup-8; do
+            git push origin --delete "$branch" || true
+          done
